@@ -211,6 +211,7 @@ const products = {
         // Add other Spiderman products here
     ]
 };
+
 function renderProducts(category) {
     const productGrid = document.querySelector('.product-grid');
     productGrid.innerHTML = '';
@@ -218,39 +219,60 @@ function renderProducts(category) {
     const categoryProducts = products[category] || [];
 
     categoryProducts.forEach(product => {
-        const markup = `
-            <div class="product-card">
-                <a href="${product.link}" target="_blank">
-                    <img src="${product.imageUrl}" alt="${product.name}">
-                    <h2>${product.name}</h2>
-                    <p>£${(product.price).toFixed(2)}</p>
-                </a>
-            </div>
-        `;
-        productGrid.innerHTML += markup;
+        const productCard = document.createElement('div');
+        productCard.classList.add('product-card');
+
+        const productLink = document.createElement('a');
+        productLink.href = product.link;
+        productLink.target = '_blank'; // Open in new tab
+
+        const productImage = document.createElement('img');
+        productImage.src = product.imageUrl;
+        productImage.alt = product.name;
+
+        const productTitle = document.createElement('h2');
+        productTitle.textContent = product.name;
+
+        const productPrice = document.createElement('p');
+        productPrice.textContent = `£${product.price.toFixed(2)}`;
+
+        productLink.appendChild(productImage);
+        productLink.appendChild(productTitle);
+        productLink.appendChild(productPrice);
+
+        productCard.appendChild(productLink);
+        productGrid.appendChild(productCard);
     });
 }
 
 document.addEventListener('DOMContentLoaded', () => {
-    renderProducts('weed'); // Default category to show on page load
-
-    const categoryLinks = document.querySelectorAll('.sidebar a');
-    categoryLinks.forEach(link => {
-        link.addEventListener('click', (e) => {
-            e.preventDefault();
-            const category = e.target.getAttribute('data-category');
-            renderProducts(category);
-            document.querySelector('.sidebar').classList.add('hidden');
-            document.querySelector('.main-content').style.marginLeft = '0';
-        });
-    });
-
+    const categoryLinks = document.querySelectorAll('.sidebar a[data-category]');
     const toggleButton = document.querySelector('.toggle-button');
     const sidebar = document.querySelector('.sidebar');
     const mainContent = document.querySelector('.main-content');
 
+    // Set default category to 'weed' when page loads
+    renderProducts('weed');
+
+    categoryLinks.forEach(link => {
+        link.addEventListener('click', (e) => {
+            e.preventDefault();
+            const category = link.getAttribute('data-category');
+            renderProducts(category);
+            // Close the sidebar after selecting a category
+            sidebar.classList.add('hidden');
+            mainContent.style.marginLeft = '0';
+        });
+    });
+
     toggleButton.addEventListener('click', () => {
-        sidebar.classList.toggle('hidden');
-        mainContent.style.marginLeft = sidebar.classList.contains('hidden') ? '0' : '250px';
+        const isHidden = sidebar.classList.contains('hidden');
+        if (isHidden) {
+            sidebar.classList.remove('hidden');
+            mainContent.style.marginLeft = '250px';
+        } else {
+            sidebar.classList.add('hidden');
+            mainContent.style.marginLeft = '0';
+        }
     });
 });

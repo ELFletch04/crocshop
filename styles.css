@@ -8,13 +8,6 @@ body {
     line-height: 1.6;
 }
 
-.container {
-    display: flex;
-    max-width: 1200px;
-    margin: 0 auto;
-    padding: 20px;
-}
-
 header {
     text-align: center;
     background-color: #222;
@@ -64,10 +57,19 @@ header h1 {
     transform: translateX(-100%);
 }
 
+.sidebar-header {
+    display: flex;
+    align-items: center;
+}
+
+.sidebar-header .toggle-button {
+    display: none; /* Hide the toggle button in the sidebar header */
+}
+
 .sidebar h2 {
     font-size: 1.8em;
     color: #444;
-    margin: 0 0 20px;
+    margin: 0 0 20px 10px; /* Add margin to the left for spacing */
 }
 
 .sidebar ul {
@@ -95,20 +97,19 @@ header h1 {
     transition: margin-left 0.3s ease;
 }
 
-/* Product Grid Styles */
 .product-grid {
-    flex: 1;
     display: flex;
     flex-wrap: wrap;
     gap: 20px;
     padding: 15px;
 }
 
+/* Product Card Styles */
 .product-card {
     background: #fff;
     border-radius: 8px;
     box-shadow: 0 4px 8px rgba(0,0,0,0.1);
-    width: calc(33% - 20px); /* Adjust according to your layout */
+    width: calc(25% - 20px); /* Adjust the width of the product cards */
     box-sizing: border-box;
     padding: 10px;
     text-align: center;
@@ -148,4 +149,34 @@ footer {
     background: #222;
     color: #fff;
     border-radius: 8px;
+}
+
+/* Responsive Styles */
+@media (max-width: 768px) {
+    .sidebar {
+        width: 100%;
+        position: static;
+        height: auto;
+        transform: none;
+    }
+
+    .sidebar.hidden {
+        display: none;
+    }
+
+    .main-content {
+        margin-left: 0;
+    }
+
+    .product-grid {
+        flex-direction: column; /* Stack products vertically */
+    }
+
+    .product-card {
+        width: 100%; /* Make product cards full width on mobile */
+    }
+
+    .sidebar-header .toggle-button {
+        display: block; /* Show the toggle button in the sidebar header on mobile */
+    }
 }
