@@ -10,7 +10,6 @@ body {
 
 .container {
     display: flex;
-    flex-direction: column;
     max-width: 1200px;
     margin: 0 auto;
     padding: 20px;
@@ -23,6 +22,7 @@ header {
     padding: 20px 0;
     border-radius: 8px;
     box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    position: relative;
 }
 
 header h1 {
@@ -30,95 +30,38 @@ header h1 {
     margin: 0;
 }
 
-header p {
-    font-size: 1.2em;
-    margin: 10px 0 0;
-}
-
-.main-content {
-    display: flex;
-}
-
-/* styles.css */
-
-/* Basic styles for the sidebar */
-.sidebar {
-    width: 250px;
-    background-color: #f4f4f4;
-    padding: 15px;
-    box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
-    position: fixed;
-    top: 0;
-    left: 0;
-    height: 100%;
-    overflow-y: auto;
-    transition: transform 0.3s ease;
-}
-
-/* Hide sidebar off-screen by default on mobile */
-/* styles.css */
-
-/* Basic styles for the sidebar */
-.sidebar {
-    width: 250px;
-    background-color: #f4f4f4;
-    padding: 15px;
-    box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
-    position: fixed;
-    top: 0;
-    left: 0;
-    height: 100%;
-    overflow-y: auto;
-    transition: transform 0.3s ease;
-}
-
-/* Hide sidebar off-screen by default on mobile */
-.sidebar.hidden {
-    transform: translateX(-100%);
-}
-
-/* Styles for the main content area */
-.main-content {
-    margin-left: 250px;
-    transition: margin-left 0.3s ease;
-}
-
-/* Hide main content on mobile */
-.main-content.mobile-hidden {
-    margin-left: 0;
-}
-
-/* Toggle button styles */
 .toggle-button {
-    display: none;
-    position: fixed;
+    position: absolute;
     top: 10px;
     left: 10px;
-    width: 50px; /* Adjust width */
-    height: 50px; /* Adjust height */
+    width: 50px;
+    height: 50px;
     background-color: #333;
     color: #fff;
     border: none;
     font-size: 24px;
     text-align: center;
-    line-height: 50px; /* Center text vertically */
+    line-height: 50px;
     cursor: pointer;
     z-index: 1000;
 }
 
-/* Show the toggle button on mobile devices */
-@media (max-width: 768px) {
-    .toggle-button {
-        display: block;
-    }
+/* Sidebar Styles */
+.sidebar {
+    width: 250px;
+    background-color: #f4f4f4;
+    padding: 15px;
+    box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 100%;
+    overflow-y: auto;
+    transition: transform 0.3s ease;
+}
 
-    .sidebar {
-        width: 100%;
-    }
-
-    .main-content {
-        margin-left: 0;
-    }
+.sidebar.hidden {
+    transform: translateX(-100%);
 }
 
 .sidebar h2 {
@@ -146,6 +89,13 @@ header p {
     text-decoration: underline;
 }
 
+/* Main Content Styles */
+.main-content {
+    margin-left: 250px;
+    transition: margin-left 0.3s ease;
+}
+
+/* Product Grid Styles */
 .product-grid {
     flex: 1;
     display: flex;
@@ -190,6 +140,7 @@ header p {
     transform: scale(1.05);
 }
 
+/* Footer Styles */
 footer {
     text-align: center;
     margin: 20px 0;

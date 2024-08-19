@@ -211,7 +211,6 @@ const products = {
         // Add other Spiderman products here
     ]
 };
-
 function renderProducts(category) {
     const productGrid = document.querySelector('.product-grid');
     productGrid.innerHTML = '';
@@ -224,8 +223,7 @@ function renderProducts(category) {
                 <a href="${product.link}" target="_blank">
                     <img src="${product.imageUrl}" alt="${product.name}">
                     <h2>${product.name}</h2>
-                    <p>£${(product.price ).toFixed(2)}</p>
-                    
+                    <p>£${(product.price).toFixed(2)}</p>
                 </a>
             </div>
         `;
@@ -233,25 +231,26 @@ function renderProducts(category) {
     });
 }
 
-
 document.addEventListener('DOMContentLoaded', () => {
     renderProducts('weed'); // Default category to show on page load
 
-    document.querySelectorAll('.sidebar a').forEach(link => {
+    const categoryLinks = document.querySelectorAll('.sidebar a');
+    categoryLinks.forEach(link => {
         link.addEventListener('click', (e) => {
             e.preventDefault();
             const category = e.target.getAttribute('data-category');
             renderProducts(category);
+            document.querySelector('.sidebar').classList.add('hidden');
+            document.querySelector('.main-content').style.marginLeft = '0';
         });
     });
 
-    // Handle sidebar toggle
     const toggleButton = document.querySelector('.toggle-button');
     const sidebar = document.querySelector('.sidebar');
     const mainContent = document.querySelector('.main-content');
 
     toggleButton.addEventListener('click', () => {
         sidebar.classList.toggle('hidden');
-        mainContent.classList.toggle('mobile-hidden');
+        mainContent.style.marginLeft = sidebar.classList.contains('hidden') ? '0' : '250px';
     });
 });
