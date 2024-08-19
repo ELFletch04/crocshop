@@ -244,3 +244,26 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     });
 });
+// script.js
+
+document.addEventListener('DOMContentLoaded', () => {
+    renderProducts('weed'); // Default category to show on page load
+
+    document.querySelectorAll('.sidebar a').forEach(link => {
+        link.addEventListener('click', (e) => {
+            e.preventDefault();
+            const category = e.target.getAttribute('data-category');
+            renderProducts(category);
+        });
+    });
+
+    // Handle sidebar toggle
+    const toggleButton = document.querySelector('.toggle-button');
+    const sidebar = document.querySelector('.sidebar');
+    const mainContent = document.querySelector('.main-content');
+
+    toggleButton.addEventListener('click', () => {
+        sidebar.classList.toggle('hidden');
+        mainContent.classList.toggle('mobile-hidden');
+    });
+});
