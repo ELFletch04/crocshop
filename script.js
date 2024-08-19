@@ -233,18 +233,6 @@ function renderProducts(category) {
     });
 }
 
-document.addEventListener('DOMContentLoaded', () => {
-    renderProducts('weed'); // Default category to show on page load
-
-    document.querySelectorAll('.sidebar a').forEach(link => {
-        link.addEventListener('click', (e) => {
-            e.preventDefault();
-            const category = e.target.getAttribute('data-category');
-            renderProducts(category);
-        });
-    });
-});
-// script.js
 
 document.addEventListener('DOMContentLoaded', () => {
     renderProducts('weed'); // Default category to show on page load
